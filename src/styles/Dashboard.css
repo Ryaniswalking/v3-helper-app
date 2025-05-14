@@ -1,0 +1,14 @@
+.dashboard{
+    width: 80vw;
+    height: 90vh;
+    max-width: 1020px;
+    display: grid;
+}
+
+.dashboard-toolbar{
+    align-self: center;
+}
+
+#dashboard-close{
+    float: left;
+}

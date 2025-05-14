@@ -1,0 +1,25 @@
+.testcase-container{
+    background-color: red;
+}
+
+.testcase-container-toolbar{
+    display: flex;
+   justify-content: flex-end;
+}
+
+.testcase-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.testcase-card {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  color: black;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+
