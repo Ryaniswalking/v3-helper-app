@@ -3,7 +3,7 @@ import TestCaseContainerToolbar from "./TestCaseContainerToolbar";
 import TestCaseList from "./TestCaseList";
 import TestCaseForm from "./AddTestCase";
 import "../../styles/TestCaseContainer.css";
-import { Button } from '@mui/material'
+import { Grid, Box, Button } from "@mui/material";
 
 function TestCaseContainer({ onClickClose }) {
   const [showNewTestCaseForm, setShowNewTestCaseForm] = useState(false);
@@ -13,8 +13,8 @@ function TestCaseContainer({ onClickClose }) {
     setShowNewTestCaseForm(true);
   };
 
-  const handleOnCreate = (newTestCaseData) => {
-    console.log(JSON.stringify(newTestCaseData, null, 2)); // logs full JSON object
+  const handleOnCreate = (newTestCaseData, newTestScenarios) => {
+    newTestCaseData["scenarios"] = newTestScenarios;
     setTestCases((prev) => [
       ...prev,
       { id: prev.length + 1, ...newTestCaseData },
@@ -23,22 +23,28 @@ function TestCaseContainer({ onClickClose }) {
   };
 
   return (
-    <div className="testcase-container">
-      <Button id="dashboard-close" onClick={onClickClose}>
-        Close
-      </Button>
-      <TestCaseContainerToolbar
-        handleAddTestCaseClick={handleAddTestCaseClick}
-      />
-      <TestCaseList testCases={testCases} />
-      {showNewTestCaseForm && (
-        <TestCaseForm
-          onCreate={handleOnCreate}
-          onClose={() => setShowNewTestCaseForm(false)}
-          testCases={testCases}
-        />
-      )}
-    </div>
+    <Box>
+      <Grid container spacing={2}>
+        <Grid item size={{ xs: 12 }}>
+          <Button id="dashboard-close" onClick={onClickClose}>
+            Close
+          </Button>
+          <TestCaseContainerToolbar
+            handleAddTestCaseClick={handleAddTestCaseClick}
+          />
+        </Grid>
+        <Grid item size={{ xs: 12 }}>
+          <TestCaseList testCases={testCases} />
+        </Grid>
+        {showNewTestCaseForm && (
+          <TestCaseForm
+            onCreate={handleOnCreate}
+            onClose={() => setShowNewTestCaseForm(false)}
+            testCases={testCases}
+          />
+        )}
+      </Grid>
+    </Box>
   );
 }
 
