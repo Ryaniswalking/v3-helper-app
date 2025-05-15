@@ -25,6 +25,7 @@ function TestCaseForm({ onCreate, onClose, testCases }) {
     skip_reason: "",
     test_suites: [],
   });
+  const [testScenarios, setTestScenarios] = useState([]);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -45,7 +46,7 @@ function TestCaseForm({ onCreate, onClose, testCases }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onCreate(formData);
+    onCreate(formData, testScenarios);
     onClose();
   };
 
@@ -58,7 +59,7 @@ function TestCaseForm({ onCreate, onClose, testCases }) {
         width: "100vw",
         height: "100vh",
         zIndex: 1300,
-        backgroundColor: "rgba(0,0,0,0.5)", 
+        backgroundColor: "rgba(0,0,0,0.5)",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -76,7 +77,7 @@ function TestCaseForm({ onCreate, onClose, testCases }) {
           overflowY: "auto",
         }}
       >
-        <form onSubmit={handleSubmit}>
+        <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
             <Grid item size={{ xs: 4 }}>
               <TextField
@@ -203,7 +204,10 @@ function TestCaseForm({ onCreate, onClose, testCases }) {
           </Grid>
           <Grid container spacing={2}>
             <Grid item size={{ xs: 12 }}>
-              <TestScenarioList testCases={testCases} />
+              <TestScenarioList
+                testScenarios={testScenarios}
+                setTestScenarios={setTestScenarios}
+              />
             </Grid>
             <Grid
               item
@@ -220,7 +224,7 @@ function TestCaseForm({ onCreate, onClose, testCases }) {
               </Button>
             </Grid>
           </Grid>
-        </form>
+        </Box>
       </Box>
     </Box>
   );
