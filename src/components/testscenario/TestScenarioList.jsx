@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { Box, Grid, Typography, Paper, Button } from "@mui/material";
 import AddTestScenario from "./AddTestScenario";
-function TestScenarioList({ testCases }) {
+
+function TestScenarioList({ testScenarios, setTestScenarios }) {
   const [showNewScenarioForm, setShowNewTestCaseForm] = useState(false);
 
   const hanldleAddScenario = () => {
@@ -12,8 +13,9 @@ function TestScenarioList({ testCases }) {
     setShowNewTestCaseForm(false);
   };
 
-  const handleCreateScenario = () => {
-    console.log("Handle Create Scenario");
+  const handleCreateScenario = (newScenario) => {
+    setTestScenarios((prev) => [...prev, newScenario])
+    setShowNewTestCaseForm(false);
   };
 
   return (
@@ -30,17 +32,17 @@ function TestScenarioList({ testCases }) {
           <Button>Delete</Button>
         </Grid>
 
-        {testCases.map((testCase, index) => (
+        {testScenarios.map((testScenario, index) => (
           <Grid item size={{ xs: 12 }} key={index}>
             <Paper sx={{ height: "100%" }} elevation={3}>
               <Typography variant="h6" gutterBottom>
-                {testCase.test_flow || "No Test Flow"}
+                {testScenario.request_info.type || "No Test Flow"}
               </Typography>
               <Typography variant="subtitle1" color="text.secondary">
-                Class: {testCase.test_class || "N/A"}
+                Service: {testScenario.request_info.service || "N/A"}
               </Typography>
               <Typography variant="body2" sx={{ mt: 1 }}>
-                {testCase.description || "No description provided."}
+                {testScenario.description || "No description provided."}
               </Typography>
             </Paper>
           </Grid>
