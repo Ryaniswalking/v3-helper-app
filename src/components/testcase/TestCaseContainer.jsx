@@ -3,6 +3,7 @@ import TestCaseContainerToolbar from "./TestCaseContainerToolbar";
 import TestCaseList from "./TestCaseList";
 import TestCaseForm from "./AddTestCase";
 import "../../styles/TestCaseContainer.css";
+import { Button } from '@mui/material'
 
 function TestCaseContainer({ onClickClose }) {
   const [showNewTestCaseForm, setShowNewTestCaseForm] = useState(false);
@@ -23,9 +24,9 @@ function TestCaseContainer({ onClickClose }) {
 
   return (
     <div className="testcase-container">
-      <button id="dashboard-close" onClick={onClickClose}>
+      <Button id="dashboard-close" onClick={onClickClose}>
         Close
-      </button>
+      </Button>
       <TestCaseContainerToolbar
         handleAddTestCaseClick={handleAddTestCaseClick}
       />
@@ -34,6 +35,7 @@ function TestCaseContainer({ onClickClose }) {
         <TestCaseForm
           onCreate={handleOnCreate}
           onClose={() => setShowNewTestCaseForm(false)}
+          testCases={testCases}
         />
       )}
     </div>
