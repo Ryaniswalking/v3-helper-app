@@ -55,7 +55,6 @@ function AddTestScenario({ onClose, onCreate }) {
       {/* Centering wrapper */}
       <Box
         sx={{
-          height: "100vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -65,15 +64,15 @@ function AddTestScenario({ onClose, onCreate }) {
         <Paper
           elevation={4}
           sx={{
-            p: 4,
+            p: 3,
             width: "90%",
-            maxWidth: 600,
+            maxWidth: 900,
             borderRadius: 2,
           }}
         >
           <Box component="form" onSubmit={handleSubmit}>
             <Typography variant="h6">Scenario Form</Typography>
-            <Grid container spacing={2}>
+            <Grid container spacing={1}>
               <Grid item size={{ xs: 4 }}>
                 <Input
                   name="scenario_collection"
