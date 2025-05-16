@@ -6,7 +6,6 @@ function TestCaseList({ testCases }) {
         {testCases.map((testCase) => (
           <div key={testCase.id} className="testcase-card">
             <h3>{testCase.description}</h3>
-            <p>{testCase.steps}</p>
           </div>
         ))}
       </div>
