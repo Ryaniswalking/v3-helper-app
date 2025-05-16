@@ -23,7 +23,7 @@ export default function RequestInfoFields({ formData, setFormData }) {
     >
       <Grid container spacing={2}>
         <Grid item size={{ xs: 12 }}>
-          <Typography variant="h5">Request Info</Typography>
+          <Typography variant="subtitle1">Request Info</Typography>
         </Grid>
         <Grid item size={{ xs: 6 }}>
           <TextField
