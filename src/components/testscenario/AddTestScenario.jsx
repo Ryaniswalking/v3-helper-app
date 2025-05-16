@@ -8,8 +8,8 @@ import {
   Input,
 } from "@mui/material";
 import { useState } from "react";
-import RequestInfoFields from "./RequestInfoFields";
-import ValidationFields from "./ValidationFields";
+import RequestInfoFields from "./request-info/RequestInfoFields";
+import ValidationFields from "./validation/ValidationFields";
 import Transition from "../transistions/Transistion";
 import FormatSelector from "./FormatSelector";
 

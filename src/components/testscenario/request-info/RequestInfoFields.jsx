@@ -1,8 +1,8 @@
 import { Box, TextField, Grid, Typography } from "@mui/material";
-import RequestType from "./request-info/RequestType";
-import ContentType from "./request-info/ContentType";
-import HeadersFields from "./request-info/HeaderFields";
-import RequestEditor from "./request-info/RequestEditor";
+import RequestType from "./RequestType";
+import ContentType from "./ContentType";
+import HeadersFields from "./HeaderFields";
+import RequestEditor from "./RequestEditor";
 
 export default function RequestInfoFields({ formData, setFormData, format }) {
   const handleChange = (e) => {
