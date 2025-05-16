@@ -70,7 +70,6 @@ export default function ValidationFields({ formData, setFormData }) {
             fullWidth
             name="status_code"
             label="Expected Status Code"
-            type="number"
             value={formData.validation.status_code}
             onChange={handleStatusCodeChange}
           />
