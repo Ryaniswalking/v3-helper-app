@@ -2,6 +2,7 @@ import { Box, TextField, Grid, Typography } from "@mui/material";
 import RequestType from "./request-info/RequestType";
 import ContentType from "./request-info/ContentType";
 import HeadersFields from "./request-info/HeaderFields";
+import RequestEditor from "./request-info/RequestEditor";
 
 export default function RequestInfoFields({ formData, setFormData, format }) {
   const handleChange = (e) => {
@@ -57,13 +58,12 @@ export default function RequestInfoFields({ formData, setFormData, format }) {
           />
         </Grid>
         <Grid item size={{ xs: 12 }}>
-          <TextField
-            fullWidth
-            name="body"
-            label="Request Body"
-            value={formData.request_info.body}
-            onChange={handleChange}
-          />
+          <Typography variant="subtitle1">Request Body</Typography>
+          <RequestEditor
+            format={format}
+            formData={formData}
+            setFormData={setFormData}
+            />
         </Grid>
       </Grid>
     </Box>
