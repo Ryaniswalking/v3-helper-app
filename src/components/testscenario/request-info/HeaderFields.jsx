@@ -52,15 +52,29 @@ export default function HeaderFields({ formData, setFormData }) {
   };
 
   return (
-    <Box mt={4}>
-      <Typography variant="subtitle1" gutterBottom>
-        Headers
-      </Typography>
+    <Box mt={1}>
+      <Grid container spacing={1} alignItems="center" justifyContent="space-between">
+        <Grid item>
+          <Typography variant="subtitle1" gutterBottom>
+            Headers
+          </Typography>
+        </Grid>
+        <Grid item>
+          <IconButton
+            onClick={addHeader}
+            color="primary"
+            aria-label="Add Header"
+          >
+            <Add />
+          </IconButton>
+        </Grid>
+      </Grid>
 
       {/* Scrollable container */}
       <Box
         sx={{
-          maxHeight: 300,
+          maxHeight: 200,
+          minHeight: 200,
           overflowY: "auto",
           pr: 1,
           mb: 2,
@@ -75,6 +89,7 @@ export default function HeaderFields({ formData, setFormData }) {
             sx={{
               p: 2,
               mb: 1,
+              mt: 1,
               mx: 1,
               backgroundColor: "#f9f9f9",
             }}
@@ -112,12 +127,6 @@ export default function HeaderFields({ formData, setFormData }) {
             </Grid>
           </Paper>
         ))}
-      </Box>
-
-      <Box textAlign="right">
-        <IconButton onClick={addHeader} color="primary" aria-label="Add Header">
-          <Add />
-        </IconButton>
       </Box>
     </Box>
   );
