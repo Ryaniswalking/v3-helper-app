@@ -24,6 +24,7 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
     skip: false,
     skip_reason: "",
     test_suites: [],
+    steps:[]
   });
   const [testScenarios, setTestScenarios] = useState([]);
   const handleChange = (e) => {
