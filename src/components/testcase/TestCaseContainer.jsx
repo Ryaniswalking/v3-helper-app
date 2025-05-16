@@ -2,12 +2,20 @@ import { useState } from "react";
 import TestCaseContainerToolbar from "./TestCaseContainerToolbar";
 import TestCaseList from "./TestCaseList";
 import TestCaseForm from "./AddTestCase";
+import GlobalInputs from "./GlobalInputs";
 import "../../styles/TestCaseContainer.css";
 import { Grid, Box, Button } from "@mui/material";
 
 function TestCaseContainer({ onClickClose }) {
   const [showNewTestCaseForm, setShowNewTestCaseForm] = useState(false);
   const [testCases, setTestCases] = useState([]);
+  const [globalInputs, setGlobalInputs] = useState({
+    app: "",
+    testCaseCollection: "",
+    testScenarionCollection: "",
+    testFlow: "",
+    testClass: ""
+  });
 
   const handleAddTestCaseClick = () => {
     setShowNewTestCaseForm(true);
@@ -34,6 +42,9 @@ function TestCaseContainer({ onClickClose }) {
           />
         </Grid>
         <Grid item size={{ xs: 12 }}>
+          <GlobalInputs setGlobalInputs={setGlobalInputs} />
+        </Grid>
+        <Grid item size={{ xs: 12 }}>
           <TestCaseList testCases={testCases} />
         </Grid>
         {showNewTestCaseForm && (
@@ -41,6 +52,7 @@ function TestCaseContainer({ onClickClose }) {
             onCreate={handleOnCreate}
             onClose={() => setShowNewTestCaseForm(false)}
             testCases={testCases}
+            globalInputs={globalInputs}
           />
         )}
       </Grid>
