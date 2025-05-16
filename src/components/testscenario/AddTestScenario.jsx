@@ -16,7 +16,7 @@ import FormatSelector from "./FormatSelector";
 function AddTestScenario({ onClose, onCreate, globalInputs }) {
   const [format, setFormat] = useState([]);
   const [formData, setFormData] = useState({
-    scenario_collection: globalInputs["testScenarioCollection"],
+    scenario_collection: globalInputs["testScenarioCollection"] || '',
     data_id: "",
     description: "",
     request_info: {
