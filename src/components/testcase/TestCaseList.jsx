@@ -1,7 +1,13 @@
+import { Box, Grid, Typography } from "@mui/material";
+import GlobalInputs from "./GlobalInputs";
 function TestCaseList({ testCases }) {
   return (
-    <>
-      <h2>Test Cases</h2>
+    <Box>
+      <Grid container>
+        <Grid item size={{ xs: 12 }}>
+          <GlobalInputs />
+        </Grid>
+      </Grid>
       <div className="testcase-list">
         {testCases.map((testCase) => (
           <div key={testCase.id} className="testcase-card">
@@ -10,7 +16,7 @@ function TestCaseList({ testCases }) {
           </div>
         ))}
       </div>
-    </>
+    </Box>
   );
 }
 
