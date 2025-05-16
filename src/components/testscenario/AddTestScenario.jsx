@@ -11,9 +11,11 @@ import { useState } from "react";
 import RequestInfoFields from "./RequestInfoFields";
 import ValidationFields from "./ValidationFields";
 import Transition from "../transistions/Transistion";
+import FormatSelector from "./FormatSelector";
 
 function AddTestScenario({ onClose, onCreate }) {
-    const [formData, setFormData] = useState({
+  const [format, setFormat] = useState([]);
+  const [formData, setFormData] = useState({
     scenario_collection: "",
     data_id: "",
     description: "",
@@ -43,11 +45,10 @@ function AddTestScenario({ onClose, onCreate }) {
     },
   });
 
-
   const handleSubmit = (e) => {
-    setFormData(formData)
-    onCreate(formData)
-    e.stopPropagation() 
+    setFormData(formData);
+    onCreate(formData);
+    e.stopPropagation();
   };
 
   return (
@@ -109,7 +110,24 @@ function AddTestScenario({ onClose, onCreate }) {
             </Grid>
 
             {/* Split into subcomponents */}
-            <RequestInfoFields formData={formData} setFormData={setFormData} />
+            <Grid
+              container
+              alignItems="center"
+              justifyContent="center"
+              sx={{
+                mt: 3,
+              }}
+            >
+              <Grid item xs={12} md={6}>
+                <FormatSelector format={format} setFormat={setFormat} />
+              </Grid>
+            </Grid>
+
+            <RequestInfoFields
+              formData={formData}
+              setFormData={setFormData}
+              format={format}
+            />
             <ValidationFields formData={formData} setFormData={setFormData} />
 
             <Button type="submit" variant="contained">

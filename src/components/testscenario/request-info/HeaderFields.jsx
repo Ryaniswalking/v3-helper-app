@@ -9,7 +9,7 @@ import {
 } from "@mui/material";
 import { Add, Delete } from "@mui/icons-material";
 
-export default function HeaderFields({ formData, setFormData }) {
+export default function HeaderFields({ formData, setFormData, format }) {
   const headersObject = formData.request_info.headers || {};
   const headersArray = Object.entries(headersObject).map(([key, value]) => ({
     key,
@@ -51,9 +51,20 @@ export default function HeaderFields({ formData, setFormData }) {
     updateFormDataHeaders(updated);
   };
 
+  const formatContentTypes = {
+    JSON: "application/json",
+    XML: "application/xml",
+    Other: "",
+  };
+
   return (
     <Box mt={1}>
-      <Grid container spacing={1} alignItems="center" justifyContent="space-between">
+      <Grid
+        container
+        spacing={1}
+        alignItems="center"
+        justifyContent="space-between"
+      >
         <Grid item>
           <Typography variant="subtitle1" gutterBottom>
             Headers
@@ -118,7 +129,7 @@ export default function HeaderFields({ formData, setFormData }) {
                 <TextField
                   fullWidth
                   label="Header Value"
-                  value={header.value}
+                  value={formatContentTypes[format] || ''}
                   onChange={(e) =>
                     handleHeaderChange(index, "value", e.target.value)
                   }

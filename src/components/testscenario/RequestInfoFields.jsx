@@ -3,7 +3,7 @@ import RequestType from "./request-info/RequestType";
 import ContentType from "./request-info/ContentType";
 import HeadersFields from "./request-info/HeaderFields";
 
-export default function RequestInfoFields({ formData, setFormData }) {
+export default function RequestInfoFields({ formData, setFormData, format }) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -18,7 +18,7 @@ export default function RequestInfoFields({ formData, setFormData }) {
   return (
     <Box
       sx={{
-        p: 3,
+        p: 1,
       }}
     >
       <Grid container spacing={2}>
@@ -38,7 +38,7 @@ export default function RequestInfoFields({ formData, setFormData }) {
           <RequestType />
         </Grid>
         <Grid item size={{ xs: 6 }}>
-          <ContentType />
+          <ContentType format={format} />
         </Grid>
         <Grid item size={{ xs: 6 }}>
           <TextField
@@ -50,13 +50,17 @@ export default function RequestInfoFields({ formData, setFormData }) {
           ></TextField>
         </Grid>
         <Grid item size={{ xs: 12 }}>
-          <HeadersFields formData={formData} setFormData={setFormData} />
+          <HeadersFields
+            formData={formData}
+            setFormData={setFormData}
+            format={format}
+          />
         </Grid>
         <Grid item size={{ xs: 12 }}>
           <TextField
             fullWidth
             name="body"
-            label="t"
+            label="Request Body"
             value={formData.request_info.body}
             onChange={handleChange}
           />

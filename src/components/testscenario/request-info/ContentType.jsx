@@ -1,19 +1,21 @@
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
-import { useState } from "react";
 
-export default function ContentType() {
-  const [value, setValue] = useState("");
+const formatToContentType = {
+  JSON: "json",
+  XML: "xml",
+  Other: "",
+};
 
-  const handleChange = (e) => {
-    setValue(e.target.value);
-  };
+export default function ContentType({ format }) {
+  const contentType = formatToContentType[format] || "";
 
   return (
     <FormControl fullWidth>
       <InputLabel>Content Type</InputLabel>
-      <Select value={value} label="Choose Type" onChange={handleChange}>
+      <Select value={contentType} label="Content Type" disabled>
         <MenuItem value="json">JSON</MenuItem>
         <MenuItem value="xml">XML</MenuItem>
+        <MenuItem value="">Other</MenuItem>
       </Select>
     </FormControl>
   );
