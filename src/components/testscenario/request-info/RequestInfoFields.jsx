@@ -36,10 +36,10 @@ export default function RequestInfoFields({ formData, setFormData, format }) {
           />
         </Grid>
         <Grid item size={{ xs: 6 }}>
-          <RequestType setFormData={setFormData}/>
+          <RequestType setFormData={setFormData} />
         </Grid>
         <Grid item size={{ xs: 6 }}>
-          <ContentType format={format} />
+          <ContentType format={format} setFormData={setFormData} />
         </Grid>
         <Grid item size={{ xs: 6 }}>
           <TextField
@@ -63,7 +63,7 @@ export default function RequestInfoFields({ formData, setFormData, format }) {
             format={format}
             formData={formData}
             setFormData={setFormData}
-            />
+          />
         </Grid>
       </Grid>
     </Box>
