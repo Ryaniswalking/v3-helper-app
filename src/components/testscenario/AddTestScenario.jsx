@@ -13,14 +13,14 @@ import ValidationFields from "./validation/ValidationFields";
 import Transition from "../transistions/Transistion";
 import FormatSelector from "./FormatSelector";
 
-function AddTestScenario({ onClose, onCreate }) {
+function AddTestScenario({ onClose, onCreate, globalInputs }) {
   const [format, setFormat] = useState([]);
   const [formData, setFormData] = useState({
-    scenario_collection: "",
+    scenario_collection: globalInputs["testScenarioCollection"],
     data_id: "",
     description: "",
     request_info: {
-      type: "POST",
+      type: "",
       body: "",
       parameters: "",
       service: "",
