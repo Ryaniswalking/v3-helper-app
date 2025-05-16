@@ -129,7 +129,7 @@ export default function HeaderFields({ formData, setFormData, format }) {
                 <TextField
                   fullWidth
                   label="Header Value"
-                  value={formatContentTypes[format] || ''}
+                  value={index < 2 ? formatContentTypes[format] : ''}
                   onChange={(e) =>
                     handleHeaderChange(index, "value", e.target.value)
                   }
