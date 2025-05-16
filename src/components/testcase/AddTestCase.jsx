@@ -206,6 +206,7 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
               <TestScenarioList
                 testScenarios={testScenarios}
                 setTestScenarios={setTestScenarios}
+                globalInputs={globalInputs}
               />
             </Grid>
             <Grid
