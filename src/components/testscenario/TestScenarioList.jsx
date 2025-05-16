@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Box, Grid, Typography, Paper, Button } from "@mui/material";
 import AddTestScenario from "./AddTestScenario";
 
-function TestScenarioList({ testScenarios, setTestScenarios }) {
+function TestScenarioList({ testScenarios, setTestScenarios, globalInputs }) {
   const [showNewScenarioForm, setShowNewTestCaseForm] = useState(false);
 
   const hanldleAddScenario = () => {
@@ -52,6 +52,7 @@ function TestScenarioList({ testScenarios, setTestScenarios }) {
         <AddTestScenario
           onClose={handleCloseAddScenario}
           onCreate={handleCreateScenario}
+          globalInputs={globalInputs}
         />
       )}
     </Box>
