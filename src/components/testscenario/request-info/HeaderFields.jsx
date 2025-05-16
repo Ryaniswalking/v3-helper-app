@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Box,
   Grid,
@@ -50,6 +50,20 @@ export default function HeaderFields({ formData, setFormData, format }) {
     setHeaders(updated);
     updateFormDataHeaders(updated);
   };
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      request_info: {
+        ...prev.request_info,
+        headers: {
+          ...prev.request_info.headers,
+          Accept: formatContentTypes[format] || "",
+          "Content-Type": formatContentTypes[format] || "",
+        },
+      },
+    }));
+  }, [format, setFormData]);
 
   const formatContentTypes = {
     JSON: "application/json",
@@ -129,7 +143,7 @@ export default function HeaderFields({ formData, setFormData, format }) {
                 <TextField
                   fullWidth
                   label="Header Value"
-                  value={index < 2 ? formatContentTypes[format] : ''}
+                  value={index < 2 ? formatContentTypes[format] : ""}
                   onChange={(e) =>
                     handleHeaderChange(index, "value", e.target.value)
                   }
