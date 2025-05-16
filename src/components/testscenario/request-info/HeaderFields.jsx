@@ -74,7 +74,7 @@ export default function HeaderFields({ formData, setFormData }) {
       <Box
         sx={{
           maxHeight: 200,
-          minHeight: 200,
+          minHeight: 100,
           overflowY: "auto",
           pr: 1,
           mb: 2,
