@@ -22,11 +22,36 @@ function TestCaseContainer({ onClickClose }) {
   };
 
   const handleCopyClick = () => {
-    const textToCopy = JSON.stringify(testCases);
-    navigator.clipboard
-      .writeText(textToCopy)
-      .then(() => console.log("Copied"))
-      .catch((err) => console.error(err));
+    linkScenarioToTest();
+    setTimeout(() => {
+      const textToCopy = JSON.stringify(testCases, null, 2);
+      navigator.clipboard
+        .writeText(textToCopy)
+        .then(() => console.log("Copied"))
+        .catch((err) => console.error(err));
+    }, 0);
+  };
+
+  const linkScenarioToTest = () => {
+    setTestCases(
+      testCases.map((testCase) => {
+        const updatedSteps = [...testCase.steps];
+        console.log(updatedSteps);
+        testCase.scenarios.forEach((scenario, index) => {
+          console.log("Scenario: ", scenario);
+          updatedSteps.push({
+            data_source: scenario["scenario_collection"],
+            data_key: index.toString(),
+            data_scenario_id: scenario["data_id"],
+          });
+        });
+
+        return {
+          ...testCase,
+          steps: updatedSteps,
+        };
+      })
+    );
   };
 
   const handleOnCreate = (newTestCaseData, newTestScenarios) => {
