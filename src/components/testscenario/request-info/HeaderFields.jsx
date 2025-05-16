@@ -95,6 +95,15 @@ export default function HeaderFields({ formData, setFormData }) {
             }}
           >
             <Grid container spacing={2} alignItems="center">
+              <Grid item xs={2}>
+                <IconButton
+                  color="error"
+                  onClick={() => deleteHeader(index)}
+                  aria-label="Delete Header"
+                >
+                  <Delete />
+                </IconButton>
+              </Grid>
               <Grid item xs={5}>
                 <TextField
                   fullWidth
@@ -114,15 +123,6 @@ export default function HeaderFields({ formData, setFormData }) {
                     handleHeaderChange(index, "value", e.target.value)
                   }
                 />
-              </Grid>
-              <Grid item xs={2}>
-                <IconButton
-                  color="error"
-                  onClick={() => deleteHeader(index)}
-                  aria-label="Delete Header"
-                >
-                  <Delete />
-                </IconButton>
               </Grid>
             </Grid>
           </Paper>
