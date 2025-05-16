@@ -22,7 +22,6 @@ function TestCaseContainer({ onClickClose }) {
   };
 
   const handleCopyClick = () => {
-    linkScenarioToTest();
     setTimeout(() => {
       const textToCopy = JSON.stringify(testCases, null, 2);
       navigator.clipboard
@@ -32,35 +31,33 @@ function TestCaseContainer({ onClickClose }) {
     }, 0);
   };
 
-  const linkScenarioToTest = () => {
-    setTestCases(
-      testCases.map((testCase) => {
-        const updatedSteps = [...testCase.steps];
-        console.log(updatedSteps);
-        testCase.scenarios.forEach((scenario, index) => {
-          console.log("Scenario: ", scenario);
-          updatedSteps.push({
-            data_source: scenario["scenario_collection"],
-            data_key: index.toString(),
-            data_scenario_id: scenario["data_id"],
-          });
-        });
+  const linkScenarioToTest = (testCase) => {
+    const updatedSteps = [...testCase.steps];
+    testCase.scenarios.forEach((scenario, index) => {
+      console.log("Scenario: ", scenario);
+      updatedSteps.push({
+        data_source: scenario["scenario_collection"],
+        data_key: index.toString(),
+        data_scenario_id: scenario["data_id"],
+      });
+    });
 
-        return {
-          ...testCase,
-          steps: updatedSteps,
-        };
-      })
-    );
+    return {
+      ...testCase,
+      steps: updatedSteps,
+    };
   };
 
   const handleOnCreate = (newTestCaseData, newTestScenarios) => {
-    newTestCaseData["scenarios"] = newTestScenarios;
+    const linkedTestCase = linkScenarioToTest({
+      ...newTestCaseData,
+      scenarios: newTestScenarios,
+    });
+
     setTestCases((prev) => [
       ...prev,
-      { id: prev.length + 1, ...newTestCaseData },
+      { id: prev.length + 1, ...linkedTestCase },
     ]);
-    setShowNewTestCaseForm(false);
   };
 
   return (
