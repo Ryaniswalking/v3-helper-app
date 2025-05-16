@@ -10,14 +10,18 @@ import "ace-builds/src-noconflict/ext-language_tools";
 ace.config.set("basePath", "/node_modules/ace-builds/src-noconflict");
 
 export default function RequestEditor({ format, formData, setFormData }) {
-  console.log("Form Data", formData);
-
   const handleChange = (newValue) => {
+    let parsedValue = newValue;
+    if (format === "JSON") {
+      try {
+        parsedValue = JSON.parse(newValue);
+      } catch (err) {}
+    }
     setFormData((prev) => ({
       ...prev,
       request_info: {
         ...prev.request_info,
-        body: newValue,
+        body: parsedValue,
       },
     }));
   };
