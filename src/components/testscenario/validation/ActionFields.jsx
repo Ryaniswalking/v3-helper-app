@@ -1,6 +1,13 @@
 import { Grid, TextField } from "@mui/material";
+import ValidationTypes from "./ValidationTypes";
 
-export default function ActionFields({ action, index, onChange, onRemove }) {
+export default function ActionFields({
+  action,
+  index,
+  onChange,
+  onRemove,
+  setFormData,
+}) {
   const handleChange = (e) => {
     const { name, value } = e.target;
     onChange(index, name, value);
@@ -8,7 +15,7 @@ export default function ActionFields({ action, index, onChange, onRemove }) {
 
   return (
     <Grid container spacing={2} sx={{ mb: 2 }}>
-      <Grid item xs={6}>
+      <Grid item size={{ xs: 6 }}>
         <TextField
           fullWidth
           name="path"
@@ -17,7 +24,7 @@ export default function ActionFields({ action, index, onChange, onRemove }) {
           onChange={handleChange}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item size={{ xs: 6 }}>
         <TextField
           fullWidth
           name="expected"
@@ -26,7 +33,7 @@ export default function ActionFields({ action, index, onChange, onRemove }) {
           onChange={handleChange}
         />
       </Grid>
-      <Grid item xs={6}>
+      <Grid item size={{ xs: 6 }}>
         <TextField
           fullWidth
           name="message"
@@ -35,16 +42,10 @@ export default function ActionFields({ action, index, onChange, onRemove }) {
           onChange={handleChange}
         />
       </Grid>
-      <Grid item xs={6}>
-        <TextField
-          fullWidth
-          name="type"
-          label="Type"
-          value={action.type}
-          onChange={handleChange}
-        />
+      <Grid item size={{ xs: 6 }}>
+        <ValidationTypes index={index} onChange={onChange} action={action} />
       </Grid>
-      <Grid item xs={5}>
+      <Grid item size={{ xs: 6 }}>
         <TextField
           fullWidth
           name="mode"
