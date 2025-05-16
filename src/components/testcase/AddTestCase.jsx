@@ -10,11 +10,11 @@ import {
 } from "@mui/material";
 import TestScenarioList from "../testscenario/TestScenarioList";
 
-function TestCaseForm({ onCreate, onClose, testCases }) {
+function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
   const [formData, setFormData] = useState({
-    test_flow: "",
-    test_class: "",
-    app_name: "",
+    test_flow: globalInputs["testFlow"],
+    test_class: globalInputs["testClass"],
+    app_name: globalInputs["app"],
     description: "",
     details: "",
     feature: "",
@@ -26,7 +26,6 @@ function TestCaseForm({ onCreate, onClose, testCases }) {
     test_suites: [],
   });
   const [testScenarios, setTestScenarios] = useState([]);
-
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
