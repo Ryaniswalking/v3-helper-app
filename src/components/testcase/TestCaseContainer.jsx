@@ -14,11 +14,19 @@ function TestCaseContainer({ onClickClose }) {
     testCaseCollection: "",
     testScenarionCollection: "",
     testFlow: "",
-    testClass: ""
+    testClass: "",
   });
 
   const handleAddTestCaseClick = () => {
     setShowNewTestCaseForm(true);
+  };
+
+  const handleCopyClick = () => {
+    const textToCopy = JSON.stringify(testCases);
+    navigator.clipboard
+      .writeText(textToCopy)
+      .then(() => console.log("Copied"))
+      .catch((err) => console.error(err));
   };
 
   const handleOnCreate = (newTestCaseData, newTestScenarios) => {
@@ -55,6 +63,11 @@ function TestCaseContainer({ onClickClose }) {
             globalInputs={globalInputs}
           />
         )}
+      </Grid>
+      <Grid item size={{ xs: 12 }}>
+        <Button variant="contained" onClick={handleCopyClick}>
+          Copy
+        </Button>
       </Grid>
     </Box>
   );
