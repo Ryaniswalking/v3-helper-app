@@ -1,6 +1,5 @@
 import { Grid, TextField } from "@mui/material";
 export default function GlobalInputs({ setGlobalInputs }) {
-
   const handleChange = (e) => {
     setGlobalInputs((prev) => ({
       ...prev,
@@ -15,7 +14,19 @@ export default function GlobalInputs({ setGlobalInputs }) {
           fullWidth
           name="app"
           label="app"
-          variant="standard"
+          variant="outlined"
+          slotProps={{
+            input: {
+              sx: {
+                color: "white",
+              },
+            },
+            label: {
+              sx: {
+                color: "white",
+              },
+            },
+          }}
           onChange={(e) => {
             handleChange(e);
           }}
@@ -26,7 +37,19 @@ export default function GlobalInputs({ setGlobalInputs }) {
           fullWidth
           name="testCaseCollection"
           label="Test Case Collection"
-          variant="standard"
+          variant="outlined"
+          slotProps={{
+            input: {
+              sx: {
+                color: "white",
+              },
+            },
+            label: {
+              sx: {
+                color: "white",
+              },
+            },
+          }}
           onChange={(e) => {
             handleChange(e);
           }}
@@ -37,7 +60,19 @@ export default function GlobalInputs({ setGlobalInputs }) {
           fullWidth
           name="testScenarioCollection"
           label="Test Scenario Collection"
-          variant="standard"
+          variant="outlined"
+          slotProps={{
+            input: {
+              sx: {
+                color: "white",
+              },
+            },
+            label: {
+              sx: {
+                color: "white",
+              },
+            },
+          }}
           onChange={(e) => {
             handleChange(e);
           }}
@@ -48,7 +83,19 @@ export default function GlobalInputs({ setGlobalInputs }) {
           fullWidth
           name="testFlow"
           label="Test Flow"
-          variant="standard"
+          variant="outlined"
+          slotProps={{
+            input: {
+              sx: {
+                color: "white",
+              },
+            },
+            label: {
+              sx: {
+                color: "white",
+              },
+            },
+          }}
           onChange={(e) => {
             handleChange(e);
           }}
@@ -59,7 +106,19 @@ export default function GlobalInputs({ setGlobalInputs }) {
           fullWidth
           name="testClass"
           label="Test Class"
-          variant="standard"
+          variant="outlined"
+          slotProps={{
+            input: {
+              sx: {
+                color: "white",
+              },
+            },
+            label: {
+              sx: {
+                color: "white",
+              },
+            },
+          }}
           onChange={(e) => {
             handleChange(e);
           }}
