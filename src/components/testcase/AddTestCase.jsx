@@ -12,6 +12,7 @@ import TestScenarioList from "../testscenario/TestScenarioList";
 
 function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
   const [formData, setFormData] = useState({
+    test_case_collection: globalInputs["testCaseCollection"],
     test_flow: globalInputs["testFlow"],
     test_class: globalInputs["testClass"],
     app_name: globalInputs["app"],
@@ -24,7 +25,7 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
     skip: false,
     skip_reason: "",
     test_suites: [],
-    steps:[]
+    steps: [],
   });
   const [testScenarios, setTestScenarios] = useState([]);
   const handleChange = (e) => {
@@ -79,7 +80,16 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
       >
         <Box component="form" onSubmit={handleSubmit}>
           <Grid container spacing={2}>
-            <Grid item size={{ xs: 4 }}>
+            <Grid item size={{ xs: 3 }}>
+              <TextField
+                fullWidth
+                label="App Name"
+                name="app_name"
+                value={formData.app_name}
+                onChange={handleChange}
+              />
+            </Grid>
+            <Grid item size={{ xs: 3 }}>
               <TextField
                 fullWidth
                 label="Test Flow"
@@ -88,7 +98,7 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item size={{ xs: 4 }}>
+            <Grid item size={{ xs: 3 }}>
               <TextField
                 fullWidth
                 label="Test Class"
@@ -97,12 +107,12 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
                 onChange={handleChange}
               />
             </Grid>
-            <Grid item size={{ xs: 4 }}>
+            <Grid item size={{ xs: 3 }}>
               <TextField
                 fullWidth
-                label="App Name"
-                name="app_name"
-                value={formData.app_name}
+                label="Collection"
+                name="testCaseCollection"
+                value={formData.test_case_collection}
                 onChange={handleChange}
               />
             </Grid>
