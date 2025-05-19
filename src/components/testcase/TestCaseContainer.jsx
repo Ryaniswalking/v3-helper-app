@@ -113,7 +113,6 @@ function TestCaseContainer({ onClickClose }) {
   };
 
   const handleExportTestCase = () => {
-    console.log("Export Test Case Called")
     const blob = new Blob(
       [JSON.stringify(constructTestCaseObject(testCases), null, 2)],
       { type: "application/json" }
