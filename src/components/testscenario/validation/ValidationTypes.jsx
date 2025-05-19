@@ -17,8 +17,10 @@ export default function ValidationTypes({ index, onChange, action }) {
         <MenuItem value="DEFAULT">DEFAULT</MenuItem>;
         <MenuItem value="FORMAT">FORMAT</MenuItem>;
         <MenuItem value="COMPARE">COMPARE</MenuItem>;
-        <MenuItem value="SOMETHING">SOMETHING</MenuItem>;
-        <MenuItem value="ELSE">ESLE</MenuItem>;
+        <MenuItem value="EQUALS_IGNORE_CASE">EQUALS_IGNORE_CASE</MenuItem>;
+        <MenuItem value="IS_NULL">IS_NULL</MenuItem>;
+        <MenuItem value="NOT_NULL">NOT_NULL</MenuItem>;
+        <MenuItem value="ARRAY_SIZE">ARRAY_SIZE</MenuItem>;
       </Select>
     </FormControl>
   );
