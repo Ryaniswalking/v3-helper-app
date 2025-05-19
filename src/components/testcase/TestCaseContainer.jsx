@@ -48,6 +48,31 @@ function TestCaseContainer({ onClickClose }) {
     };
   };
 
+  const constructTestScenarioObject = (testCases) => {
+    const testScenarioObject = {};
+
+    testCases.forEach((testCase) => {
+      const appName = testCase.app_name;
+
+      testCase.scenarios.forEach((scenario) => {
+        const collection = scenario.scenario_collection;
+
+        const { scenario_collection, ...strippedScenario } = scenario;
+
+        if (!(appName in testScenarioObject)) {
+          testScenarioObject[appName] = {};
+        }
+        if (!(collection in testScenarioObject[appName])) {
+          testScenarioObject[appName][collection] = [];
+        }
+
+        testScenarioObject[appName][collection].push(strippedScenario);
+      });
+    });
+
+    return testScenarioObject;
+  };
+
   const constructTestCaseObject = (testCases) => {
     const testCaseObj = {};
 
@@ -88,6 +113,39 @@ function TestCaseContainer({ onClickClose }) {
     ]);
   };
 
+  const handleExportTestCase = () => {
+    console.log("Export Test Case Called")
+    const blob = new Blob(
+      [JSON.stringify(constructTestCaseObject(testCases), null, 2)],
+      { type: "application/json" }
+    );
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "test_cases.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
+  const handleExportTestScenario = () => {
+    const blob = new Blob(
+      [JSON.stringify(constructTestScenarioObject(testCases), null, 2)],
+      { type: "application/json" }
+    );
+    const url = URL.createObjectURL(blob);
+
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "test_scenarios.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <Box>
       <Grid container spacing={2}>
@@ -117,6 +175,12 @@ function TestCaseContainer({ onClickClose }) {
       <Grid item size={{ xs: 12 }}>
         <Button variant="contained" onClick={handleCopyClick}>
           Copy
+        </Button>
+        <Button variant="contained" onClick={handleExportTestCase}>
+          Export Test Cases
+        </Button>
+        <Button variant="contained" onClick={handleExportTestScenario}>
+          Export Test Scenario
         </Button>
       </Grid>
     </Box>
