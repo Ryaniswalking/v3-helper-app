@@ -10,79 +10,112 @@ import {
 import { Add, Delete } from "@mui/icons-material";
 
 export default function HeaderFields({ formData, setFormData, format }) {
-  const headersObject = formData.request_info.headers || {};
-  const headersArray = Object.entries(headersObject).map(([key, value]) => ({
-    key,
-    value,
-  }));
-
-  const [headers, setHeaders] = React.useState(headersArray);
-
-  const updateFormDataHeaders = (headerList) => {
-    const headerObject = headerList.reduce((acc, { key, value }) => {
-      if (key) acc[key] = value;
-      return acc;
-    }, {});
-    setFormData((prev) => ({
-      ...prev,
-      request_info: {
-        ...prev.request_info,
-        headers: headerObject,
-      },
-    }));
-  };
-
-  const handleHeaderChange = (index, field, value) => {
-    const updated = [...headers];
-    updated[index][field] = value;
-    setHeaders(updated);
-    updateFormDataHeaders(updated);
-  };
-
-  const addHeader = () => {
-    const updated = [...headers, { key: "", value: "" }];
-    setHeaders(updated);
-    updateFormDataHeaders(updated);
-  };
-
-  const deleteHeader = (index) => {
-    const updated = headers.filter((_, i) => i !== index);
-    setHeaders(updated);
-    updateFormDataHeaders(updated);
-  };
-
-  useEffect(() => {
-    setFormData((prev) => ({
-      ...prev,
-      request_info: {
-        ...prev.request_info,
-        headers: {
-          ...prev.request_info.headers,
-          Accept: formatContentTypes[format] || "",
-          "Content-Type": formatContentTypes[format] || "",
-        },
-      },
-    }));
-  }, [format, setFormData]);
-
   const formatContentTypes = {
     JSON: "application/json",
     XML: "application/xml",
     Other: "",
   };
 
+  const [headers, setHeaders] = React.useState([]);
+
+  const objectToArray = (obj) =>
+    Object.entries(obj).map(([key, value]) => ({ key, value }));
+
+  const headersArrayToObject = (arr) =>
+    arr.reduce((acc, { key, value }) => {
+      if (key) acc[key] = value;
+      return acc;
+    }, {});
+
+  const syncFormDataHeaders = (headerArray) => {
+    const customHeaders = headersArrayToObject(headerArray);
+    const formatHeaders = {
+      Accept: formatContentTypes[format] || "",
+      "Content-Type": formatContentTypes[format] || "",
+    };
+    setFormData((prev) => ({
+      ...prev,
+      request_info: {
+        ...prev.request_info,
+        headers: {
+          ...formatHeaders,
+          ...customHeaders,
+        },
+      },
+    }));
+  };
+
+  useEffect(() => {
+    const currentHeaders = formData?.request_info?.headers || {};
+    const customHeaders = Object.fromEntries(
+      Object.entries(currentHeaders).filter(
+        ([key]) => key !== "Accept" && key !== "Content-Type"
+      )
+    );
+    setHeaders(objectToArray(customHeaders));
+
+    const formatHeaders = {
+      Accept: formatContentTypes[format] || "",
+      "Content-Type": formatContentTypes[format] || "",
+    };
+
+    setFormData((prev) => ({
+      ...prev,
+      request_info: {
+        ...prev.request_info,
+        headers: {
+          ...formatHeaders,
+          ...customHeaders,
+        },
+      },
+    }));
+  }, [format]);
+
+  const addHeader = () => {
+    const updated = [...headers, { key: "", value: "" }];
+    setHeaders(updated);
+    syncFormDataHeaders(updated);
+  };
+
+  const handleHeaderChange = (index, field, value) => {
+    const updated = [...headers];
+    updated[index][field] = value;
+    setHeaders(updated);
+    syncFormDataHeaders(updated);
+  };
+
+  const deleteHeader = (index) => {
+    const updated = [...headers];
+    updated.splice(index, 1);
+    setHeaders(updated);
+    syncFormDataHeaders(updated);
+  };
+
   return (
-    <Box mt={1}>
+    <Box mt={2}>
+      <Typography variant="subtitle1" gutterBottom>
+        Headers
+      </Typography>
+
+      {/* Display Accept and Content-Type */}
+      <Box ml={1} mb={2}>
+        <Typography variant="body2">
+          <strong>Accept:</strong> {formatContentTypes[format] || ""}
+        </Typography>
+        <Typography variant="body2">
+          <strong>Content-Type:</strong> {formatContentTypes[format] || ""}
+        </Typography>
+      </Box>
+
+      {/* Custom Headers Section */}
       <Grid
         container
         spacing={1}
-        alignItems="center"
         justifyContent="space-between"
+        alignItems="center"
       >
         <Grid item>
-          <Typography variant="subtitle1" gutterBottom>
-            Headers
-          </Typography>
+          <Typography variant="subtitle2">Custom Headers</Typography>
         </Grid>
         <Grid item>
           <IconButton
@@ -95,7 +128,6 @@ export default function HeaderFields({ formData, setFormData, format }) {
         </Grid>
       </Grid>
 
-      {/* Scrollable container */}
       <Box
         sx={{
           maxHeight: 200,
@@ -107,7 +139,7 @@ export default function HeaderFields({ formData, setFormData, format }) {
           borderRadius: 1,
         }}
       >
-        {headers.map((header, index) => (
+        {headers.map(({ key, value }, index) => (
           <Paper
             key={index}
             elevation={1}
@@ -119,8 +151,8 @@ export default function HeaderFields({ formData, setFormData, format }) {
               backgroundColor: "#f9f9f9",
             }}
           >
-            <Grid container spacing={2} alignItems="center">
-              <Grid item xs={2}>
+            <Grid container spacing={1} alignItems="center">
+              <Grid item size={{ xs: 2 }}>
                 <IconButton
                   color="error"
                   onClick={() => deleteHeader(index)}
@@ -129,21 +161,21 @@ export default function HeaderFields({ formData, setFormData, format }) {
                   <Delete />
                 </IconButton>
               </Grid>
-              <Grid item xs={5}>
+              <Grid item size={{ xs: 5 }}>
                 <TextField
                   fullWidth
                   label="Header Key"
-                  value={header.key}
+                  value={key}
                   onChange={(e) =>
                     handleHeaderChange(index, "key", e.target.value)
                   }
                 />
               </Grid>
-              <Grid item xs={5}>
+              <Grid item size={{ xs: 5 }}>
                 <TextField
                   fullWidth
                   label="Header Value"
-                  value={index < 2 ? formatContentTypes[format] : ""}
+                  value={value}
                   onChange={(e) =>
                     handleHeaderChange(index, "value", e.target.value)
                   }
