@@ -12,6 +12,7 @@ import TestScenarioList from "../testscenario/TestScenarioList";
 
 function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
   const [formData, setFormData] = useState({
+    case_id: 0,
     test_case_collection: globalInputs["testCaseCollection"],
     test_flow: globalInputs["testFlow"],
     test_class: globalInputs["testClass"],
@@ -26,6 +27,7 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
     skip_reason: "",
     test_suites: [],
     steps: [],
+    tags: [],
   });
   const [testScenarios, setTestScenarios] = useState([]);
   const handleChange = (e) => {
