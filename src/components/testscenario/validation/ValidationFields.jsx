@@ -12,9 +12,27 @@ export default function ValidationFields({ formData, setFormData }) {
     }));
   };
 
+  const parseInput = (value) => {
+    try {
+      const parsed = JSON.parse(value);
+
+      if (typeof parsed === "object" && parsed !== null) {
+        return parsed;
+      }
+    } catch (e) {}
+
+    if (!isNaN(value) && value.trim() !== "") return Number(value);
+    if (value === "true") return true;
+    if (value === "false") return false;
+    if (value === "null") return null;
+    return value;
+  };
+
   const handleActionChange = (index, name, value) => {
+    let parsedValue = "expected" === name ? parseInput(value) : value;
+
     const updatedActions = [...formData.validation.actions];
-    updatedActions[index] = { ...updatedActions[index], [name]: value };
+    updatedActions[index] = { ...updatedActions[index], [name]: parsedValue };
     setFormData((prev) => ({
       ...prev,
       validation: {
