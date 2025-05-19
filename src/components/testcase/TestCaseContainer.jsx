@@ -48,6 +48,34 @@ function TestCaseContainer({ onClickClose }) {
     };
   };
 
+  const constructTestCaseObject = (testCases) => {
+    const testCaseObj = {};
+
+    testCases.forEach((testCase) => {
+      const appName = testCase.app_name;
+      const collection = testCase.test_case_collection;
+
+      const {
+        id,
+        app_name,
+        test_case_collection,
+        scenarios,
+        ...strippedTestCase
+      } = testCase;
+
+      if (!(appName in testCaseObj)) {
+        testCaseObj[appName] = {};
+      }
+
+      if (!(collection in testCaseObj[appName])) {
+        testCaseObj[appName][collection] = [];
+      }
+
+      testCaseObj[appName][collection].push(strippedTestCase);
+    });
+    return testCaseObj;
+  };
+
   const handleOnCreate = (newTestCaseData, newTestScenarios) => {
     const linkedTestCase = linkScenarioToTest({
       ...newTestCaseData,
