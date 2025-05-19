@@ -82,7 +82,6 @@ function TestCaseContainer({ onClickClose }) {
 
       const {
         id,
-        app_name,
         test_case_collection,
         scenarios,
         ...strippedTestCase
