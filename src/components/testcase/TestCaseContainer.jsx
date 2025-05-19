@@ -37,7 +37,7 @@ function TestCaseContainer({ onClickClose }) {
       console.log("Scenario: ", scenario);
       updatedSteps.push({
         data_source: scenario["scenario_collection"],
-        data_key: index.toString(),
+        data_key: (index + 1).toString(),
         data_scenario_id: scenario["data_id"],
       });
     });
