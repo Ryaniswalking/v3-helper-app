@@ -30,6 +30,9 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
     tags: [],
   });
   const [testScenarios, setTestScenarios] = useState([]);
+  const [testSuitesInput, setTestSuitesInput] = useState(
+    formData.test_suites.join(", ")
+  );
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
 
@@ -38,7 +41,10 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
     } else if (name === "test_suites") {
       setFormData({
         ...formData,
-        test_suites: value.split(",").map((s) => s.trim()),
+        test_suites: value
+          .split(",")
+          .map((s) => s.trim())
+          .filter((s) => s.length > 0), // Avoid empty strings
       });
     } else if (name === "retry_count" || name === "active") {
       setFormData({ ...formData, [name]: parseInt(value, 10) });
@@ -209,8 +215,21 @@ function TestCaseForm({ onCreate, onClose, testCases, globalInputs }) {
                 fullWidth
                 label="Test Suites (comma-separated)"
                 name="test_suites"
-                value={formData.test_suites.join(", ")}
-                onChange={handleChange}
+                value={testSuitesInput}
+                onChange={(e) => setTestSuitesInput(e.target.value)}
+                onBlur={(e) => {
+                  console.log("On Blur")
+                  const suites = e.target.value
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean);
+                  setFormData((prev) => ({
+                    ...prev,
+                    test_suites: suites,
+                  }));
+
+                  console.log("Suites: ", suites)
+                }}
               />
             </Grid>
           </Grid>
