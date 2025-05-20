@@ -1,5 +1,6 @@
 import { Grid, TextField, Typography, Button, Box, Paper } from "@mui/material";
 import ActionFields from "./ActionFields";
+import { Delete } from "@mui/icons-material";
 
 export default function ValidationFields({ formData, setFormData }) {
   const handleStatusCodeChange = (e) => {
@@ -95,6 +96,9 @@ export default function ValidationFields({ formData, setFormData }) {
       </Grid>
 
       <Box mt={2}>
+        <Button variant="outlined" onClick={addAction} sx={{ mt: 2 }}>
+          Add Validation Action
+        </Button>
         <Paper
           elevation={2}
           sx={{
@@ -125,12 +129,12 @@ export default function ValidationFields({ formData, setFormData }) {
                 onChange={handleActionChange}
                 onRemove={removeAction}
               />
+              <Button variant="outlined" startIcon={<Delete />} onClick={removeAction}>
+                Delete
+              </Button>
             </Paper>
           ))}
         </Paper>
-        <Button variant="outlined" onClick={addAction} sx={{ mt: 2 }}>
-          Add Validation Action
-        </Button>
       </Box>
     </>
   );
