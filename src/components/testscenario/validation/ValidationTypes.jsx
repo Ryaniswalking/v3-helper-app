@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Select, MenuItem, FormControl, InputLabel } from "@mui/material";
 
 export default function ValidationTypes({ index, onChange, action }) {
-  const [type, setType] = useState("");
+  const [type, setType] = useState("DEFAULT");
 
   const handleChange = (event) => {
     const newType = event.target.value;
