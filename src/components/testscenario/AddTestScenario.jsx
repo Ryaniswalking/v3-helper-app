@@ -12,6 +12,7 @@ import RequestInfoFields from "./request-info/RequestInfoFields";
 import ValidationFields from "./validation/ValidationFields";
 import Transition from "../transistions/Transistion";
 import FormatSelector from "./FormatSelector";
+import GlobalData from "./request-info/GloabalData";
 
 function AddTestScenario({ onClose, onCreate, globalInputs }) {
   const [format, setFormat] = useState([]);
@@ -30,6 +31,7 @@ function AddTestScenario({ onClose, onCreate, globalInputs }) {
         "Content-Type": "",
       },
     },
+    global_data: [],
     validation: {
       status_code: 200,
       actions: [],
@@ -119,6 +121,7 @@ function AddTestScenario({ onClose, onCreate, globalInputs }) {
               setFormData={setFormData}
               format={format}
             />
+            <GlobalData formData={formData} setFormData={setFormData} />
             <ValidationFields formData={formData} setFormData={setFormData} />
 
             <Button type="submit" variant="contained">
