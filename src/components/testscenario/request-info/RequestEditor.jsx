@@ -16,6 +16,8 @@ export default function RequestEditor({ format, formData, setFormData }) {
       try {
         parsedValue = JSON.parse(newValue);
       } catch (err) {}
+    } else if (format === "XML") {
+      parsedValue = btoa(newValue);
     }
     setFormData((prev) => ({
       ...prev,
