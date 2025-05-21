@@ -129,7 +129,11 @@ export default function ValidationFields({ formData, setFormData }) {
                 onChange={handleActionChange}
                 onRemove={removeAction}
               />
-              <Button variant="outlined" startIcon={<Delete />} onClick={removeAction}>
+              <Button
+                variant="outlined"
+                startIcon={<Delete />}
+                onClick={removeAction}
+              >
                 Delete
               </Button>
             </Paper>
